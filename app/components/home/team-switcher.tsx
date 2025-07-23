@@ -1,5 +1,6 @@
 import * as React from "react"
 import { ChevronsUpDown, Plus } from "lucide-react"
+import { Link } from "react-router";
 
 import {
   DropdownMenu,
@@ -64,6 +65,7 @@ export function TeamSwitcher({
               Organizations
             </DropdownMenuLabel>
             {org.map((org, index) => (
+            <Link to={org.path} key={org.name}>
               <DropdownMenuItem
                 key={org.name}
                 onClick={() => setActiveTeam(org)}
@@ -75,6 +77,7 @@ export function TeamSwitcher({
                 {org.name}
                 <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
               </DropdownMenuItem>
+            </Link>
             ))}
             <DropdownMenuSeparator />
             <DropdownMenuItem className="gap-2 p-2">

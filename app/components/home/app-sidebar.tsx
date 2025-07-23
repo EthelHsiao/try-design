@@ -25,7 +25,7 @@ const data = {
     user: {
         name: "user",
         email: "username@example.com",
-        avatar: "/avatars/shadcn.jpg",
+        avatar: "https://i.pravatar.cc/150?u=yukina",
     },
     orgs: [
         {
@@ -66,17 +66,6 @@ const data = {
                     title: "Need your help",
                     url: "#",
                 },
-            ],
-        },
-        {
-            title: "History",
-            url: "#",
-            icon: History,
-            items: [
-                {
-                    title: "Submitted",
-                    url: "#",
-                }
             ],
         }
     ],

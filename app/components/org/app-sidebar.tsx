@@ -1,173 +1,166 @@
 import * as React from "react"
 import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
+    AudioWaveform,
+    Command, Frame,
+    House, Inbox,
+    LayoutDashboard,
+    Settings,
+    Users,
 } from "lucide-react"
 
-import { NavMain } from "~/components/org/nav-main"
-import { NavProjects } from "~/components/org/nav-projects"
-import { NavUser } from "~/components/org/nav-user"
-import { TeamSwitcher } from "~/components/org/team-switcher"
+import {NavMain} from "~/components/org/nav-main"
+import {NavUser} from "~/components/org/nav-user"
+import {TeamSwitcher} from "~/components/org/team-switcher"
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarHeader,
+    SidebarRail,
 } from "~/components/ui/sidebar"
 
-// This is sample data.
+import {useSidebarView} from "~/components/org/sidebar-context";
+
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
+    user: {
+        name: "user",
+        email: "username@example.com",
+        avatar: "https://i.pravatar.cc/150?u=yukina",
     },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
-  navMain: [
-    {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
+    orgs: [
         {
-          title: "History",
-          url: "#",
+            name: "NYCU SDC",
+            logo: AudioWaveform,
+            plan: "School Club",
+            path: "/org-home",
         },
         {
-          title: "Starred",
-          url: "#",
+            name: "Home",
+            logo: House,
+            plan: "",
+            path: "/",
         },
         {
-          title: "Settings",
-          url: "#",
+            name: "COSCUP 2024",
+            logo: Command,
+            plan: "Conference",
+            path: "/org-home",
         },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
+    ],
+    navMain: [
         {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
+            title: "Inbox",
+            url: "#",
+            icon: Inbox,
+            isActive: false,
+            items: [
+                {
+                    title: "All",
+                    url: "#",
+                },
+                {
+                    title: "Announcement",
+                    url: "#",
+                },
+                {
+                    title: "Need your help",
+                    url: "#",
+                },
+            ],
         },
         {
-          title: "Get Started",
-          url: "#",
+            title: "Dashboard",
+            url: "#",
+            icon: LayoutDashboard,
+            isActive: false,
+            items: []
         },
         {
-          title: "Tutorials",
-          url: "#",
+            title: "Members",
+            url: "/org-home/members",
+            icon: Users,
+            isActive: false,
+            items: []
         },
         {
-          title: "Changelog",
-          url: "#",
+            title: "Settings",
+            url: "#",
+            icon: Settings,
+            isActive: false,
+            items: [
+                {
+                    title: "Introduction",
+                    url: "#",
+                },
+                {
+                    title: "Visibility",
+                    url: "#",
+                }
+            ]
         },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
+    ],
+    navUnit: [
         {
-          title: "General",
-          url: "#",
+            title: "Administration DEPT.",
+            url: "#",
+            icon: Frame,
+            isActive: false,
+            items: [
+                {
+                    title: "Dashboard",
+                    url: "#",
+                },
+                {
+                    title: "Settings",
+                    url: "#",
+                },
+                {
+                    title: "Publish",
+                    url: "/org-home/publish",
+                }
+            ],
         },
         {
-          title: "Team",
-          url: "#",
+            title: "Finance DEPT.",
+            url: "#",
+            icon: Frame,
+            isActive: false,
+            items: [
+                {
+                    title: "Dashboard",
+                    url: "#",
+                },
+                {
+                    title: "Settings",
+                    url: "#",
+                },
+                {
+                    title: "Publish",
+                    url: "/org-home/publish",
+                }
+            ],
         },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
-  ],
+    ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  return (
-    <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
-      </SidebarHeader>
-      <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
-      </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
-      <SidebarRail />
-    </Sidebar>
-  )
+export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
+    const {stack} = useSidebarView()
+
+    const current = stack[stack.length - 1]
+
+    return (
+        <Sidebar collapsible="icon" {...props}>
+            <SidebarHeader>
+                <TeamSwitcher teams={data.orgs}/>
+            </SidebarHeader>
+            <SidebarContent>
+                <NavMain title="Organization" items={data.navMain}/>
+                <NavMain title="Units" more={false} items={data.navUnit}/>
+            </SidebarContent>
+            <SidebarFooter>
+                <NavUser user={data.user}/>
+            </SidebarFooter>
+            <SidebarRail/>
+        </Sidebar>
+    )
 }
