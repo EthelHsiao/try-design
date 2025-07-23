@@ -190,13 +190,6 @@ export function MemberTable() {
                     <DialogTitle>{editMode ? "Edit Member" : "Add Member"}</DialogTitle>
                     <div className="space-y-4">
                         <div className="space-y-2">
-                            <Label>Name</Label>
-                            <Input
-                                value={form.name}
-                                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                            />
-                        </div>
-                        <div className="space-y-2">
                             <Label>Email</Label>
                             <Input
                                 value={form.email}
